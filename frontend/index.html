@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+            <style>
+              body {
+                font-family: 'Poppins', sans-serif;
+              }
+            </style>
+   
     <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lost & Found</title>
@@ -8,18 +15,49 @@
     <style></style>
     </head>
 <body>
-<div class="container">
-        <button class="clickFind"></button>
-        <button class="clickFound"></button>
-        <button class="clickBrowse"></button>
+<nav>
+    <div class="container"></div>
+    <a href="find.html">
+        <div class="clickFind"><button class="clickFind">Find</button>
+    </a>
+    <a href="found.html">
+        <div class="clickFound"><button class="clickFound">Post</button></div>
+    </a>
+    <a href="browse.html">
+        <div class="clickBrowse"> <button class="clickBrowse">Browse</button></div>
+
+    </a>
 
     <div class="title">LOST & FOUND</div>
     <div class="buttons">
-        <button class="find">Find an item</button>
-        <button class="found">Post a found item</button>
+        <button class="find" onclick="location.href=find.html">Find an item</button>
+        <button class="found" onclick="location.href=found.html">Post a found item</button>
     </div>
-   
-   
+</nav>
 </div>
 </body>
 </html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lost & Found</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <a href="#">Find</a>
+    <a href="#">Post</a>
+    <a href="#">Browse</a>
+  </nav>
+
+  <div class="main-content">
+    <h1>LOST & FOUND</h1>
+    <div class="button-group">
+      <button onclick="location.href='find.html'">Find an item</button>
+      <button onclick="location.href='found.html'">Post a found item</button>
+    </div>
+  </div>
+</body>
+</html> -->
