@@ -7,12 +7,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .form-container {
-  width: 500px;
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 h1 {
@@ -20,6 +22,7 @@ h1 {
   font-weight: 700;
   font-size: 24px;
   margin-bottom: 30px;
+  text-align: center;
 }
 
 form {
@@ -31,24 +34,36 @@ form {
 input {
   background-color: black;
   border: 1px solid yellow;
-  padding: 12px;
+  padding: 10px;
   color: white;
-  font-weight: 700;
   font-size: 14px;
   outline: none;
-}
-
-::placeholder {
-  color: white;
 }
 
 button {
   margin-top: 20px;
   background-color: yellow;
   color: black;
-  font-weight: 700;
-  font-size: 16px;
   border: none;
   padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ffd700;
+}
+
+@media (max-width: 500px) {
+  input,
+  button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
 }

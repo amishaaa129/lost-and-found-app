@@ -7,9 +7,7 @@ body {
 }
 
 .browse-container {
-  padding: 60px 40px;
-  min-height: 100vh;
-  background-color: black;
+  padding: 60px 20px;
   text-align: center;
 }
 
@@ -21,8 +19,8 @@ body {
 
 .item-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
   justify-items: center;
 }
 
@@ -56,4 +54,14 @@ body {
 .item-card p {
   font-size: 14px;
   color: #ccc;
+}
+
+@media (max-width: 600px) {
+  .browse-container h1 {
+    font-size: 28px;
+  }
+
+  .item-card {
+    padding: 15px;
+  }
 }

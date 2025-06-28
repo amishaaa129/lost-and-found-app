@@ -23,31 +23,30 @@ body {
   align-items: center;
   justify-content: center;
   padding: 60px 20px;
-  min-height: calc(100vh - 80px); /* full viewport minus header */
+  min-height: calc(100vh - 80px);
 }
 
 .title {
-  font-size: 64px;
+  font-size: 48px;
   font-weight: 900;
   color: #FFF600;
   text-align: center;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 20px;
   justify-content: center;
 }
 
 button {
-  width: 250px;
-  height: 82px;
-  padding: 14px;
-  font-size: 20px;
+  width: 220px;
+  height: 70px;
+  padding: 12px;
+  font-size: 18px;
   font-weight: 800;
-  font-family: Poppins, sans-serif;
   border: 2px solid #FFF600;
   background-color: black;
   color: white;
@@ -62,8 +61,14 @@ button:hover {
   transform: scale(1.03);
 }
 
-.clickFind,
-.clickFound,
-.clickBrowse {
-  all: unset; /* Reset default styles */
+@media (max-width: 600px) {
+  .title {
+    font-size: 32px;
+  }
+
+  button {
+    width: 90%;
+    max-width: 300px;
+    font-size: 16px;
+  }
 }
