@@ -1,0 +1,99 @@
+.browse-container {
+  padding: 40px;
+  background-color: black;
+  min-height: 100vh;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.browse-heading {
+  text-align: center;
+  font-size: 36px;
+  color: #FFF600;
+  margin-bottom: 20px;
+}
+
+.type-select {
+  display: block;
+  margin: 0 auto 30px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: black;
+  border: 2px solid #FFF600;
+  color: white;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Fixed 3 columns */
+  gap: 25px;
+  justify-items: center;
+}
+
+.item-card {
+  width: 300px; /* fixed width to maintain layout */
+  background-color: #1a1a1a;
+  border: 1px solid #FFF600;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.item-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px #fff60044;
+}
+
+.image-wrapper {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.item-info h2 {
+  color: #FFF600;
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+.item-info p {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.user-details {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ccc;
+}
+
+.no-items {
+  text-align: center;
+  color: gray;
+  margin-top: 30px;
+}
+
+@media (max-width: 1024px) {
+  .items-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .items-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

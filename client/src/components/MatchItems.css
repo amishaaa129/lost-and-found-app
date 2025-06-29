@@ -1,0 +1,69 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+h1 {
+  color: yellow;
+  font-weight: 700;
+  font-size: 24px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+input {
+  background-color: black;
+  border: 1px solid yellow;
+  padding: 10px;
+  color: white;
+  font-size: 14px;
+  outline: none;
+}
+
+button {
+  margin-top: 20px;
+  background-color: yellow;
+  color: black;
+  border: none;
+  padding: 15px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #ffd700;
+}
+
+@media (max-width: 500px) {
+  input,
+  button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+}
