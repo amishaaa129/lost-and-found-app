@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import './ReportLost.css'; // ✅ using your CSS
+import './ReportLost.css';
 
 function ReportLost() {
   const [formData, setFormData] = useState({
@@ -11,10 +10,11 @@ function ReportLost() {
     description: ''
   });
 
-  const [image, setImage] = useState(null);
+  const [matches, setMatches] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
@@ -22,21 +22,22 @@ function ReportLost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const payload = new FormData();
-    for (const key in formData) {
-      payload.append(key, formData[key]);
-    }
-    if (image) {
-      payload.append('image', image);
-    }
+    setLoading(true);
+    setMatches([]);
 
     try {
-      const res = await axios.post('http://localhost:3000/api/items', payload);
-      alert('Lost item reported successfully!');
+      const res = await fetch('http://localhost:5000/api/match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ description: formData.description })
+      });
+
+      const data = await res.json();
+      setMatches(data.matches || []);
     } catch (err) {
-      alert('Error submitting form');
-      console.error(err);
+      console.error('Error fetching matches:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -49,9 +50,25 @@ function ReportLost() {
         <input type="email" name="email" placeholder="EMAIL" value={formData.email} onChange={handleChange} required />
         <input type="text" name="title" placeholder="TITLE" value={formData.title} onChange={handleChange} required />
         <input type="text" name="description" placeholder="DESCRIPTION" value={formData.description} onChange={handleChange} required />
-        <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
         <button type="submit">POST</button>
       </form>
+
+      {loading && <p style={{ color: 'yellow', marginTop: '20px' }}>Finding matches...</p>}
+
+      {matches.length > 0 && (
+        <div className="matches">
+          <h2>Top Matches</h2>
+          <ul>
+            {matches.map((match, index) => (
+              <li key={index}>
+                <strong>{match.description}</strong><br />
+                Location: {match.location}<br />
+                Similarity Score: {match.score}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
