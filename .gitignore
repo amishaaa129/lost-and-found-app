@@ -31,3 +31,5 @@ backup.sql
 /backend/node_modules
 
 /uploads
+
+/found_images
