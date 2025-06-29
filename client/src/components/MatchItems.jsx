@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './MatchItems.css';
 
 function MatchItems() {
@@ -8,35 +7,58 @@ function MatchItems() {
     phone: '',
     email: '',
     title: '',
-    description: ''
+    description: '',
+    location: ''
   });
 
   const [image, setImage] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
     }));
   };
 
+  const handleImageChange = (e) => {
+    setImage(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitted(false);
 
-    const payload = new FormData();
-    for (const key in formData) {
-      payload.append(key, formData[key]);
-    }
+    const data = new FormData();
+    Object.entries(formData).forEach(([key, value]) => {
+      data.append(key, value);
+    });
     if (image) {
-      payload.append('image', image);
+      data.append('image', image);
     }
 
     try {
-      const res = await axios.post('http://localhost:3000/api/items', payload);
-      alert('Found item submitted successfully!');
+      const res = await fetch('http://localhost:5000/api/found', {
+        method: 'POST',
+        body: data
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          title: '',
+          description: '',
+          location: ''
+        });
+        setImage(null);
+      } else {
+        console.error('Submission failed');
+      }
     } catch (err) {
-      alert('Error submitting form');
-      console.error(err);
+      console.error('Error:', err);
     }
   };
 
@@ -49,9 +71,12 @@ function MatchItems() {
         <input type="email" name="email" placeholder="EMAIL" value={formData.email} onChange={handleChange} required />
         <input type="text" name="title" placeholder="TITLE" value={formData.title} onChange={handleChange} required />
         <input type="text" name="description" placeholder="DESCRIPTION" value={formData.description} onChange={handleChange} required />
-        <input type="file" name="image" accept="image/*" onChange={(e) => setImage(e.target.files[0])} />
+        <input type="text" name="location" placeholder="LOCATION" value={formData.location} onChange={handleChange} required />
+        <input type="file" onChange={handleImageChange} accept="image/*" />
         <button type="submit">POST</button>
       </form>
+
+      {submitted && <p style={{ color: 'yellow', marginTop: '20px' }}>Found item submitted successfully!</p>}
     </div>
   );
 }

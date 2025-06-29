@@ -12,6 +12,7 @@ function ReportLost() {
 
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -21,25 +22,40 @@ function ReportLost() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMatches([]);
+  e.preventDefault();
+  setLoading(true);
+  setMatches([]);
 
-    try {
-      const res = await fetch('http://localhost:5000/api/match', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ description: formData.description })
-      });
+  const formDataToSend = new FormData();
+  Object.entries(formData).forEach(([key, value]) =>
+    formDataToSend.append(key, value)
+  );
+  if (image) formDataToSend.append("image", image);
 
-      const data = await res.json();
-      setMatches(data.matches || []);
-    } catch (err) {
-      console.error('Error fetching matches:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    // Save to DB (with image)
+    await fetch("http://localhost:5000/api/lost", {
+      method: "POST",
+      body: formDataToSend
+    });
+
+    // Fetch matches using only the description
+    const res = await fetch("http://localhost:5000/api/match", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ description: formData.description })
+    });
+
+    const data = await res.json();
+    setMatches(data.matches || []);
+  } catch (err) {
+    console.error("Submit failed:", err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+const handleImageChange = (e) => setImage(e.target.files[0]);
 
   return (
     <div className="form-container">
@@ -50,6 +66,7 @@ function ReportLost() {
         <input type="email" name="email" placeholder="EMAIL" value={formData.email} onChange={handleChange} required />
         <input type="text" name="title" placeholder="TITLE" value={formData.title} onChange={handleChange} required />
         <input type="text" name="description" placeholder="DESCRIPTION" value={formData.description} onChange={handleChange} required />
+        <input type="file" onChange={handleImageChange} accept="image/*" />
         <button type="submit">POST</button>
       </form>
 
