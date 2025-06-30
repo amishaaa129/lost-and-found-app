@@ -10,10 +10,10 @@ app.use(express.json());
 const matchRoutes = require('./routes/matchRoutes');
 const foundRoutes = require("./routes/found");
 const lostRoutes = require("./routes/lost");
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api", lostRoutes);
 app.use('/api/match', matchRoutes);
 app.use('/api/found', foundRoutes);
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Start server
 app.listen(5000, () => {

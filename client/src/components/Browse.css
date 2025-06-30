@@ -36,7 +36,7 @@
 .item-card {
   width: 300px; /* fixed width to maintain layout */
   background-color: #1a1a1a;
-  border: 1px solid #FFF600;
+  border: 5px solid #FFF600;
   border-radius: 10px;
   padding: 20px;
   text-align: center;

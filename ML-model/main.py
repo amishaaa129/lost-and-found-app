@@ -57,9 +57,14 @@ async def match_item(
     # Save uploaded image
     img_filename, img_path = None, None
     if image:
-        os.makedirs("uploads", exist_ok=True)
-        img_filename = f"{title.replace(' ', '_')}_{image.filename}"
-        img_path = os.path.join("uploads", img_filename)
+        # 🔁 Use the backend/uploads path (not ML-model/uploads)
+        uploads_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../backend/uploads"))
+        os.makedirs(uploads_dir, exist_ok=True)
+
+        # 🔁 Use original filename only
+        img_filename = image.filename
+        img_path = os.path.join(uploads_dir, img_filename)
+
         with open(img_path, "wb") as buffer:
             shutil.copyfileobj(image.file, buffer)
 
@@ -91,7 +96,7 @@ async def match_item(
             key = os.path.basename(match["image_path"]) if match.get("image_path") else match["description"]
             matched_item = next((item for item in found_items if item["description"] == match["description"]), None)
             text_results.append({
-                "id": matched_item["id"] if matched_item else None,
+                "id": matched_item["id"] if matched_item else None,  # ✅ added
                 "imgpath": key,
                 "description": match.get("description", key),
                 "location": match.get("location", "Unknown"),
@@ -136,7 +141,7 @@ async def match_item(
                     fname = os.path.basename(match["path"])
                     item = item_lookup.get(fname)
                     image_results.append({
-                        "id": item["id"] if item else None,
+                        "id": item["id"] if item else None,  # ✅ added
                         "imgpath": fname,
                         "description": item["description"] if item else fname,
                         "location": item["location"] if item else "Unknown",

@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
+import banner from '../wheres-my-stuff-logo.jpeg'; // Adjust path as needed
 
 function Home() {
   return (
     <>
-      <div className="header">LOST & FOUND</div>
+      <div className="header">
+        <img src={banner} alt="Where's My Stuff?" className="banner-img" />
+      </div>
       <div className="container">
         <div className="title">What would you like to do?</div>
         <div className="buttons">
