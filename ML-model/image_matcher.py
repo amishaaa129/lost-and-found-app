@@ -14,7 +14,7 @@ def load_found_images(folder_path):
     image_paths = []
     
     for filename in os.listdir(folder_path):
-        if filename.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
+        if filename.lower().endswith((".png", ".jpg", ".jpeg", ".webp", ".jfif", ".avif")):
             image = Image.open(os.path.join(folder_path, filename)).convert("RGB")
             image_input = preprocess(image).unsqueeze(0).to(device)
 
@@ -28,14 +28,14 @@ def load_found_images(folder_path):
     return torch.vstack(image_embeddings), image_paths
 
 #user image smh 
-def embed_query_image(image_path):
+def embed_query_image(image_path, model, preprocess):
+    from PIL import Image
+    import torch
     image = Image.open(image_path).convert("RGB")
-    image_input = preprocess(image).unsqueeze(0).to(device)
-
+    image_input = preprocess(image).unsqueeze(0)
     with torch.no_grad():
         embedding = model.encode_image(image_input)
-        embedding /= embedding.norm(dim=-1, keepdim = True)
-
+        embedding /= embedding.norm(dim=-1, keepdim=True)
     return embedding
 
 #matching them because why not, this shit way too difficult 

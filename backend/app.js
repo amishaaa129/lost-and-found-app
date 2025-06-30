@@ -11,7 +11,7 @@ const matchRoutes = require('./routes/matchRoutes');
 const foundRoutes = require("./routes/found");
 const lostRoutes = require("./routes/lost");
 app.use("/api", lostRoutes);
-app.use('/api', matchRoutes);
+app.use('/api/match', matchRoutes);
 app.use('/api/found', foundRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 

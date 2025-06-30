@@ -1,6 +1,6 @@
-description,location
-Black leather wallet found near library,Library
-Set of car keys found by the canteen entrance,Canteen
-Blue water bottle with stickers found in classroom,Classroom
-Grey hoodie left in auditorium,Auditorium
-Samsung phone with cracked screen found at sports complex,Sports Complex
+id,description,location
+1,Black leather wallet found near library,Library
+2,Set of car keys found by the canteen entrance,Canteen
+3,Blue water bottle with stickers found in classroom,Classroom
+4,Grey hoodie left in auditorium,Auditorium
+5,Samsung phone with cracked screen found at sports complex,Sports Complex
